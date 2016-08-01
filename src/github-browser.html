@@ -1,0 +1,43 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+
+    <div class="row">
+      <div class="col-md-12">
+        <label for="org-name">
+          Organization
+        </label>
+        <div class="input-group">
+          <input type="text" class="form-control" value.bind="orgName" id="org-name">
+          <div class="input-group-btn">
+            <button class="btn btn-primary" click.delegate="orgChanged()">Go!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div if.bind="repositories" class="row">
+      <div class="col-md-12">
+        <div repeat.for="repo of repositories" class="row">
+          <div class="col-md-6">
+            <h3><a href.bind="repo.html_url" target="_blank">${repo.full_name}</a></h3>
+
+            <div class="row">
+              <div class="col-md-1">
+                <i class="fa fa-star"></i> ${repo.stargazers_count}
+              </div>
+              <div class="col-md-1">
+                <i class="fa fa-eye"></i> ${repo.watchers_count}
+              </div>
+              <div class="col-md-1">
+                <i class="fa fa-code-fork"></i> ${repo.forks_count}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
