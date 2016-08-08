@@ -17,13 +17,18 @@
     </div>
 
     <hr/>
-
-    <div if.bind="repositories" class="row">
+	
+	<div if.bind="repositories" class="row">
       <div class="col-md-12">
         <div repeat.for="repo of repositories" class="row">
           <div class="col-md-6">
             <h3><a href.bind="repo.html_url" target="_blank">${repo.full_name}</a></h3>
-
+			<label for="repo_description">Description: </label>
+			<textarea  readonly rows="2" cols="100" id="repo_description" value.bind="repo.description"></textarea>
+			
+			<label for="repo_issues">Issues and pull requests: ${issues[repo.name].cnt}</label>
+			<textarea  readonly rows="2" cols="100" id="repo_issues" value.bind="issues[repo.name].strng"></textarea>			
+			
             <div class="row">
               <div class="col-md-1">
                 <i class="fa fa-star"></i> ${repo.stargazers_count}
@@ -39,5 +44,7 @@
         </div>
       </div>
     </div>
+	
+	<hr/>
   </section>
 </template>
