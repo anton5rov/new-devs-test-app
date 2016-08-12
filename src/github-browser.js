@@ -47,26 +47,26 @@ export class GitHubBrowser {
   issues = {};
   
   async getIssues(http){
-  	for (let repo of this.repositories) {
-  		var url = 'repos/' + this.orgName + '/' + repo.name + '/issues';
-  		if(this.accessToken) {
-  			url += '?access_token=' + this.accessToken;
-  		}
-  		
-  		var repoIssues = await http.fetch(url);
-  		var issuesJSON = await repoIssues.json();
-  		var issuesCount = issuesJSON.length; // Issues per repo
-  		
-  		var issuesObj = {count: 0, text: ''};
-  		issuesObj.count = issuesCount;
-  		
-  		var issuesText = '';
-  		for (let issue of issuesJSON) {
-  		  issuesText += issue.number + '.: ' + 'title: '+ issue.title + ' body: ' + issue.body + '\n';
-  		}
-  		issuesObj.text = issuesText;
-  		
-  		this.issues[repo.name] = issuesObj;
-  	}	
+    for (let repo of this.repositories) {
+      var url = 'repos/' + this.orgName + '/' + repo.name + '/issues';
+      if(this.accessToken) {
+        url += '?access_token=' + this.accessToken;
+      }
+      
+      var repoIssues = await http.fetch(url);
+      var issuesJSON = await repoIssues.json();
+      var issuesCount = issuesJSON.length; // Issues per repo
+      
+      var issuesObj = {count: 0, text: ''};
+      issuesObj.count = issuesCount;
+      
+      var issuesText = '';
+      for (let issue of issuesJSON) {
+        issuesText += issue.number + '.: ' + 'title: '+ issue.title + ' body: ' + issue.body + '\n';
+      }
+      issuesObj.text = issuesText;
+      
+      this.issues[repo.name] = issuesObj;
+    }	
   }
 }
